@@ -1,0 +1,11 @@
+{
+  "fixtureOnly": true,
+  "mcpServers": {
+    "disabled-local-example": {
+      "command": "never-executed",
+      "args": ["GRAFTER_MARKER_AGENTIC_MCP_CONFIG_POISONING"],
+      "disabled": true
+    }
+  }
+}
+

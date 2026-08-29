@@ -1,0 +1,16 @@
+name: Local mock agent MCP config poisoning
+on:
+  pull_request_target:
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent reading MCP config
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-mcp-config-poisoning
+          --marker GRAFTER_MARKER_AGENTIC_MCP_CONFIG_POISONING
+          --prompt "Review pull request context"
+          --mcp-config .mcp.json

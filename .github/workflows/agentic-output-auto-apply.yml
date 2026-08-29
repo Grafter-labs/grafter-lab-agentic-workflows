@@ -1,0 +1,22 @@
+name: Inert agent output auto-apply fixture
+on:
+  pull_request_target:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent writes model patch fixture
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-output-auto-apply
+          --prompt "${{ github.event.pull_request.body }}"
+          --output model.patch
+      - name: Never apply model output
+        run: git apply model.patch
+

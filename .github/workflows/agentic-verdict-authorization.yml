@@ -1,0 +1,22 @@
+name: Inert agent verdict authorization fixture
+on:
+  pull_request_target:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  fixture:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent produces approval verdict
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-verdict-authorization
+          --prompt "${{ github.event.pull_request.body }}"
+          --verdict approved
+      - name: Never authorize from model verdict
+        run: test "$MODEL_VERDICT" = approved && gh pr merge --auto
+

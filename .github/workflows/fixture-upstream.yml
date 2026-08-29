@@ -1,0 +1,13 @@
+name: Untrusted agent fixture input
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "GRAFTER_MARKER_AGENTIC_WORKFLOW_RUN_UPSTREAM"
+

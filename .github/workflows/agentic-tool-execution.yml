@@ -1,0 +1,20 @@
+name: Inert agent tool execution fixture
+on:
+  pull_request_target:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent in aider auto mode
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-tool-execution
+          --prompt "${{ github.event.pull_request.body }}"
+          --mode aider --yes
+

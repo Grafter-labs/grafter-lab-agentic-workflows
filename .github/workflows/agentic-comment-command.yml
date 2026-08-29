@@ -1,0 +1,18 @@
+name: Local mock agent comment command
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent for comment command
+        env:
+          SIMULATED_MUTATION_SINK: actions/github-script
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-comment-command
+          --marker GRAFTER_MARKER_AGENTIC_COMMENT_COMMAND
+          --prompt "${{ github.event.comment.body }}"

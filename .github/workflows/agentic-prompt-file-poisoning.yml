@@ -1,0 +1,17 @@
+name: Local mock agent prompt file poisoning
+on:
+  pull_request_target:
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local ai-review mock agent reading AGENTS.md
+        env:
+          SIMULATED_MUTATION_SINK: actions/github-script
+        run: >-
+          python scripts/mock_agent.py
+          --scenario agentic-prompt-file-poisoning
+          --marker GRAFTER_MARKER_AGENTIC_PROMPT_FILE_POISONING
+          --prompt-file AGENTS.md
