@@ -1,0 +1,21 @@
+name: Safe fixed-input marker demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run local mock agent with fixed input
+        run: >-
+          python scripts/mock_agent.py
+          --scenario safe-manual-demo
+          --marker GRAFTER_MARKER_SAFE_MANUAL_DEMO
+          --prompt "Fixed trusted demonstration input"

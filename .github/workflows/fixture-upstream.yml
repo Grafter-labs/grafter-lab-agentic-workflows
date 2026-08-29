@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   marker:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "GRAFTER_MARKER_AGENTIC_WORKFLOW_RUN_UPSTREAM"
-
